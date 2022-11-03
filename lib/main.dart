@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_gallery/presentation/pages/gallery_back.dart';
 import '../shared/sharedpreferences/shared_pref.dart';
 import '../bloc/login/login_cubit.dart';
-import '../presentation/pages/gallery.dart';
-import 'bloc/mygallery/mygallery_cubit.dart';
-import 'presentation/pages/login_screen.dart';
+import '../bloc/mygallery/mygallery_cubit.dart';
+import '../presentation/pages/login_screen.dart';
 import '../data/network/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.initialize();
   Widget? widget;
-  String token = SharedPref.getToken()!;
+  String? token = SharedPref.getToken();
   debugPrint('Token: $token');
-  if (token == '') {
+  if (token == '' || token == null) {
     widget = const LoginScreen();
   } else {
-    widget = GalleryScreen();
+    widget = GalleryBack();
   }
   DioHelper.init();
   runApp(MyApp(startScreen: widget));
 }
 
 class MyApp extends StatelessWidget {
-  Widget? startScreen;
-  MyApp({super.key, this.startScreen});
+  final Widget? startScreen;
+  const MyApp({super.key, this.startScreen});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -34,8 +34,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        home: startScreen,
+        theme: ThemeData(fontFamily: 'OpenSans'),
+        title: 'My Gallery',
+        home: const LoginScreen(),
       ),
     );
   }

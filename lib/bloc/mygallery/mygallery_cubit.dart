@@ -1,9 +1,6 @@
 import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:my_gallery/data/model/mygallery_model.dart';
 import '../../data/endpoints.dart';
 import '../../data/network/dio_helper.dart';
