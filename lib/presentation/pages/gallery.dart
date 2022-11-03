@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_gallery/data/endpoints.dart';
 import 'package:my_gallery/data/model/mygallery_model.dart';
 import 'package:my_gallery/data/network/dio_helper.dart';
+import 'package:my_gallery/presentation/pages/login_screen.dart';
+import 'package:my_gallery/shared/sharedpreferences/shared_pref.dart';
 import '../../bloc/mygallery/mygallery_cubit.dart';
 import '../../bloc/mygallery/mygallery_states.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,8 +30,6 @@ class GalleryScreen extends StatelessWidget {
     return BlocConsumer<MyGalleryCubit, MyGalleryStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        /*List imagePath =
-            MyGalleryCubit.get(context).galleryModel!.data!.images!;*/
         return Scaffold(
           body: Builder(builder: (context) {
             return SafeArea(
@@ -38,7 +38,14 @@ class GalleryScreen extends StatelessWidget {
                   Row(
                     children: [
                       ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            SharedPref.saveToken('');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()),
+                            );
+                          },
                           icon: const Icon(Icons.logout),
                           label: const Text('log out')),
                       ElevatedButton.icon(
@@ -46,6 +53,7 @@ class GalleryScreen extends StatelessWidget {
                             image = await picker.pickImage(
                                 source: ImageSource.gallery);
                             file = File(image!.path);
+                            // ignore: use_build_context_synchronously
                             MyGalleryCubit.get(context)
                                 .postMyGalleryData(image: file);
 

@@ -40,7 +40,7 @@ class DioHelper {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token'
     };
-    return dio.post(baseUrl + '$url/76', data: dataTobody);
+    return dio.post(baseUrl + url, data: dataTobody);
   }
 
   static Future<Response> uploadImage({
