@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_gallery/presentation/pages/gallery_back.dart';
+import '../presentation/pages/gallery_back.dart';
 import '../shared/sharedpreferences/shared_pref.dart';
 import '../bloc/login/login_cubit.dart';
 import '../bloc/mygallery/mygallery_cubit.dart';
