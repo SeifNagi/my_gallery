@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_gallery/presentation/pages/gallery.dart';
-import '../../bloc/login_cubit.dart';
-import '../../bloc/login_states.dart';
+import '../../bloc/login/login_cubit.dart';
+import '../../bloc/login/login_states.dart';
 
-class MyGallery extends StatefulWidget {
-  const MyGallery({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<MyGallery> createState() => _MyGalleryState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _MyGalleryState extends State<MyGallery> {
+class _LoginScreenState extends State<LoginScreen> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -107,7 +107,7 @@ class _MyGalleryState extends State<MyGallery> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const GalleryScreen()),
+                                              GalleryScreen()),
                                     );
                                   }
                                 }

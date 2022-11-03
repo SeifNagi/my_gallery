@@ -1,11 +1,11 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_gallery/data/endpoints.dart';
-import 'package:my_gallery/data/model/login_model.dart';
-import '../bloc/login_states.dart';
+import '/bloc/login/login_states.dart';
+import '/data/endpoints.dart';
+import '/data/model/login_model.dart';
+import '/shared/sharedpreferences/shared_pref.dart';
 
-import '../data/network/dio_helper.dart';
+import '../../data/network/dio_helper.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitialState());
@@ -16,8 +16,10 @@ class LoginCubit extends Cubit<LoginStates> {
     DioHelper.postData(
       url: loginPath,
       dataTobody: {'email': email, 'password': password},
-    ).then((value) {
+    ).then((value) async {
       loginModel = LoginModel.fromJson(value.data);
+      await SharedPref.saveToken(value.data['token']);
+      await SharedPref.saveUserName(value.data['user']['name']);
       debugPrint(value.data.toString());
       debugPrint('Login Success:${value.data}');
       emit(LoginSucceessState());

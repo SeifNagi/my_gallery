@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import '../endpoints.dart';
 import 'package:dio/dio.dart';
 
@@ -14,27 +17,46 @@ class DioHelper {
 
   static Future<Response> getData({
     String token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMDg4ZTM4Njg5ZDYyM2U3N2RjMGNmYzZjNmYzMTUwZThhNDUzMDE4YmFjNWE3ODhmOGQyZmQ0MjJiMzE4NDNmMTE2NjJlYzAxN2M5M2MyYWUiLCJpYXQiOjE2NjczODc1NTMuNDg4MjQ3LCJuYmYiOjE2NjczODc1NTMuNDg4MjUzLCJleHAiOjE2OTg5MjM1NTMuNDY1ODA5LCJzdWIiOiI4MyIsInNjb3BlcyI6W119.Aaj2tAHnKCNpMKzL3DMsgLbJJjwVdyuiDTkS8ox_7q82jTIW9_SGdKbvi9BJF5Euo-1PmKZgrUW_11BwzeD3Jq7kls6515kTK_w2mulaL-vkWX-kreha7g5K3dXyZ2uIa9exyqOc2TxYlgQZLuD9UZq2f13owitMnmY-fg2wFhEBdhbV3XzpdBodWm1PVPhnucnO8ZZJOzMRU41VnEn1oNKHPhTLHsLT9QKjh4EB2QRD4qb3tuHK06jJ64rt7i9ydMXMguFilF1A8Avl9A3Y-OxP4B9IcC_c9uMRN0tOFQLgb9BWg50vyCGltXBR0ZlMo7jXRF9VAgzspHMmI1QE5L5Mb6kEaIPVsvXJtyy5-PAygSW3wsw7R5mdlU31ZcMmphYTE-FFaO07Vqr7P1vwujJFaI1MmIrEcqlg4VR4-fzoswrPOy312eJcTYwfRFLU5ES2QDIXdwosqQAuLw_CkI6zDkIUucdYOLC_-yIQNOusgbKZpW2pb7d8Jrch1_Ns61YwGT_vlFLD0gxmjY5BaMLyw_81qZPbieUPuICrBw3Sdxb6ezFns_fA27OH79C-ccLVEvDqXAmVjhBsQTjnnGDKyExRPID-aeXs3SMHKypp8MxSPGO2pVUvNFodB9s6Ufeq5DsnxJByGThp5e5-sNnYsjv9U-YuiLYmHwkVH4U',
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYTE3MTBmNTA4MzFmY2NiNDYwNGExMzY0ODJmNDFiZjU5OTEzY2JkY2ZhZmU2ZDY1OWJmZmQ5OGVkODE1MDk5MTRmNTRmMjZmZDA2NGZjZDIiLCJpYXQiOjE2NjcyODk3ODUuMDMzMTk5LCJuYmYiOjE2NjcyODk3ODUuMDMzMjAzLCJleHAiOjE2OTg4MjU3ODUuMDI2MzI0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bWImC0xkzNQe8iKxL1Scg0tGGZGUy3vWsiX1vBzj1gLvynIMJcOqVkEVZc2C3MgSaCHjyqGkN7zWyqYVqLasAaKKFmj9JiQgXozvPcHJPoJCGQQvogt-gnM0DPeFMF-g_CVJPNZ3nUkXpOLl3Os5DhvW53OVT1n5pisoNyvsrEJURWTXxt1EIxwnmoj0An8y9kq2WSX4Zn2RoVGKe3QnL-KOGKksfv2ahj7hG-ZNwVYazI6TXCIxZBCYGoZtfvq9CjTrVUcCBSiGgdyaJzAZi0lNR2c2zcZxWGbBQ_QvfTFDZmmPyogScE5cgy4MGsnYe4Sw7qLmHIrSsrMaJxRgQ_b7xobq9ob1vDhw9O-VcPpiCllEFyjMkdKOFC8UffoYZB3bafp9KZB6Dr3tS7fo6f4ojAKnj-b8g6AigjuFb4FAYlC0vxT76mtvvYFm8MjH1kH2QmJ0HzvhBxv45K9Cdtuvr3DdrwyDaoROR4eZ6S-Xp-LYuCkZ-e4UenLJC4mDUu8u6xoyLHKul3FhNlAUMj-oScKZgJxRUYhbVxzXruHwaycKdlX284-Y6cfSAf3AjIvfaXYeB1ajGuuCtYceBVGM5tDxY4i9I7kthk3DNRjaRQPIl5c8GQlYV3I3p-RItB33Y-ECNiG92U2fgB8fAVw5urOuFX7pIZZ0NEc6VAY',
+    required String url,
     required Map<String, dynamic> query,
   }) async {
     dio.options = BaseOptions(headers: {
+      'connection': 'keep-alive',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token'
+      'Authorization': 'Bearer $token',
     });
-    print(baseUrl);
-    return await dio.get(baseUrl, queryParameters: query);
+    return await dio.get(url, queryParameters: query);
   }
 
   static Future<Response> postData({
     required String url,
     String token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMDg4ZTM4Njg5ZDYyM2U3N2RjMGNmYzZjNmYzMTUwZThhNDUzMDE4YmFjNWE3ODhmOGQyZmQ0MjJiMzE4NDNmMTE2NjJlYzAxN2M5M2MyYWUiLCJpYXQiOjE2NjczODc1NTMuNDg4MjQ3LCJuYmYiOjE2NjczODc1NTMuNDg4MjUzLCJleHAiOjE2OTg5MjM1NTMuNDY1ODA5LCJzdWIiOiI4MyIsInNjb3BlcyI6W119.Aaj2tAHnKCNpMKzL3DMsgLbJJjwVdyuiDTkS8ox_7q82jTIW9_SGdKbvi9BJF5Euo-1PmKZgrUW_11BwzeD3Jq7kls6515kTK_w2mulaL-vkWX-kreha7g5K3dXyZ2uIa9exyqOc2TxYlgQZLuD9UZq2f13owitMnmY-fg2wFhEBdhbV3XzpdBodWm1PVPhnucnO8ZZJOzMRU41VnEn1oNKHPhTLHsLT9QKjh4EB2QRD4qb3tuHK06jJ64rt7i9ydMXMguFilF1A8Avl9A3Y-OxP4B9IcC_c9uMRN0tOFQLgb9BWg50vyCGltXBR0ZlMo7jXRF9VAgzspHMmI1QE5L5Mb6kEaIPVsvXJtyy5-PAygSW3wsw7R5mdlU31ZcMmphYTE-FFaO07Vqr7P1vwujJFaI1MmIrEcqlg4VR4-fzoswrPOy312eJcTYwfRFLU5ES2QDIXdwosqQAuLw_CkI6zDkIUucdYOLC_-yIQNOusgbKZpW2pb7d8Jrch1_Ns61YwGT_vlFLD0gxmjY5BaMLyw_81qZPbieUPuICrBw3Sdxb6ezFns_fA27OH79C-ccLVEvDqXAmVjhBsQTjnnGDKyExRPID-aeXs3SMHKypp8MxSPGO2pVUvNFodB9s6Ufeq5DsnxJByGThp5e5-sNnYsjv9U-YuiLYmHwkVH4U',
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYTE3MTBmNTA4MzFmY2NiNDYwNGExMzY0ODJmNDFiZjU5OTEzY2JkY2ZhZmU2ZDY1OWJmZmQ5OGVkODE1MDk5MTRmNTRmMjZmZDA2NGZjZDIiLCJpYXQiOjE2NjcyODk3ODUuMDMzMTk5LCJuYmYiOjE2NjcyODk3ODUuMDMzMjAzLCJleHAiOjE2OTg4MjU3ODUuMDI2MzI0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bWImC0xkzNQe8iKxL1Scg0tGGZGUy3vWsiX1vBzj1gLvynIMJcOqVkEVZc2C3MgSaCHjyqGkN7zWyqYVqLasAaKKFmj9JiQgXozvPcHJPoJCGQQvogt-gnM0DPeFMF-g_CVJPNZ3nUkXpOLl3Os5DhvW53OVT1n5pisoNyvsrEJURWTXxt1EIxwnmoj0An8y9kq2WSX4Zn2RoVGKe3QnL-KOGKksfv2ahj7hG-ZNwVYazI6TXCIxZBCYGoZtfvq9CjTrVUcCBSiGgdyaJzAZi0lNR2c2zcZxWGbBQ_QvfTFDZmmPyogScE5cgy4MGsnYe4Sw7qLmHIrSsrMaJxRgQ_b7xobq9ob1vDhw9O-VcPpiCllEFyjMkdKOFC8UffoYZB3bafp9KZB6Dr3tS7fo6f4ojAKnj-b8g6AigjuFb4FAYlC0vxT76mtvvYFm8MjH1kH2QmJ0HzvhBxv45K9Cdtuvr3DdrwyDaoROR4eZ6S-Xp-LYuCkZ-e4UenLJC4mDUu8u6xoyLHKul3FhNlAUMj-oScKZgJxRUYhbVxzXruHwaycKdlX284-Y6cfSAf3AjIvfaXYeB1ajGuuCtYceBVGM5tDxY4i9I7kthk3DNRjaRQPIl5c8GQlYV3I3p-RItB33Y-ECNiG92U2fgB8fAVw5urOuFX7pIZZ0NEc6VAY',
     required Map<String, dynamic> dataTobody,
   }) async {
     dio.options.headers = {
+      'connection': 'keep-alive',
       'Content-Type': 'application/json',
-      'Authorization': token
+      'Authorization': 'Bearer $token'
     };
-    return dio.post(baseUrl + url, data: dataTobody);
+    return dio.post(baseUrl + '$url/76', data: dataTobody);
+  }
+
+  static Future<Response> uploadImage({
+    required File image,
+    required String url,
+    String token =
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYTE3MTBmNTA4MzFmY2NiNDYwNGExMzY0ODJmNDFiZjU5OTEzY2JkY2ZhZmU2ZDY1OWJmZmQ5OGVkODE1MDk5MTRmNTRmMjZmZDA2NGZjZDIiLCJpYXQiOjE2NjcyODk3ODUuMDMzMTk5LCJuYmYiOjE2NjcyODk3ODUuMDMzMjAzLCJleHAiOjE2OTg4MjU3ODUuMDI2MzI0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.bWImC0xkzNQe8iKxL1Scg0tGGZGUy3vWsiX1vBzj1gLvynIMJcOqVkEVZc2C3MgSaCHjyqGkN7zWyqYVqLasAaKKFmj9JiQgXozvPcHJPoJCGQQvogt-gnM0DPeFMF-g_CVJPNZ3nUkXpOLl3Os5DhvW53OVT1n5pisoNyvsrEJURWTXxt1EIxwnmoj0An8y9kq2WSX4Zn2RoVGKe3QnL-KOGKksfv2ahj7hG-ZNwVYazI6TXCIxZBCYGoZtfvq9CjTrVUcCBSiGgdyaJzAZi0lNR2c2zcZxWGbBQ_QvfTFDZmmPyogScE5cgy4MGsnYe4Sw7qLmHIrSsrMaJxRgQ_b7xobq9ob1vDhw9O-VcPpiCllEFyjMkdKOFC8UffoYZB3bafp9KZB6Dr3tS7fo6f4ojAKnj-b8g6AigjuFb4FAYlC0vxT76mtvvYFm8MjH1kH2QmJ0HzvhBxv45K9Cdtuvr3DdrwyDaoROR4eZ6S-Xp-LYuCkZ-e4UenLJC4mDUu8u6xoyLHKul3FhNlAUMj-oScKZgJxRUYhbVxzXruHwaycKdlX284-Y6cfSAf3AjIvfaXYeB1ajGuuCtYceBVGM5tDxY4i9I7kthk3DNRjaRQPIl5c8GQlYV3I3p-RItB33Y-ECNiG92U2fgB8fAVw5urOuFX7pIZZ0NEc6VAY',
+  }) async {
+    dio.options.headers = {
+      'connection': 'keep-alive',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    var fromData = FormData.fromMap({
+      'img': await MultipartFile.fromFile(image.path),
+    });
+    return dio.post(baseUrl + url, data: fromData);
   }
 }
