@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../presentation/pages/gallery_back.dart';
+import '../presentation/pages/gallery_screen.dart';
 import '../shared/sharedpreferences/shared_pref.dart';
 import '../bloc/login/login_cubit.dart';
 import '../bloc/mygallery/mygallery_cubit.dart';
@@ -16,7 +16,7 @@ void main() async {
   if (token == '' || token == null) {
     widget = const LoginScreen();
   } else {
-    widget = GalleryBack();
+    widget = GalleryScreen();
   }
   DioHelper.init();
   runApp(MyApp(startScreen: widget));
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'OpenSans'),
         title: 'My Gallery',
-        home: const LoginScreen(),
+        home: startScreen,
       ),
     );
   }
