@@ -22,7 +22,7 @@ This is an application named my gallery.The idea of this application is to help 
   </tr>
   <tr>
     <td><img src="screenshot/Login_Mobile.jpg" width=240/></td>
-    <td><img src="screenshot/Login_using_tablet.jpg" width=240/></td>
+    <td><img src="screenshot/Login_using_tablet.JPG" width=370/></td>
   </tr>
   <tr>
     <td>Home page oon phone</td>
@@ -30,7 +30,7 @@ This is an application named my gallery.The idea of this application is to help 
   </tr>
   <tr>
     <td><img src="screenshot/HomePage_Mobile.jpg" width=240></td>
-    <td><img src="screenshot/HomePage_tablet.jpg" width=240</td>
+    <td><img src="screenshot/HomePage_tablet.JPG" width=370</td>
   </tr>
   <tr>
     <td>Upload page on phone</td>
@@ -39,7 +39,7 @@ This is an application named my gallery.The idea of this application is to help 
   </tr>
   <tr>
     <td><img src="screenshot/upload_Mobile.jpg" width=240></td>
-    <td><img src="screenshot/upload_tablet.jpg" width=240></td>
+    <td><img src="screenshot/upload_tablet.JPG" width=370></td>
    <td><img src="screenshot/after pressing gallery.jpg" width=240></td>
   </tr>
  </table>
