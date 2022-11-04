@@ -7,12 +7,17 @@ It is a place where users can view and upload there photos
 * [Technologies](#technologies)
 * [How to use](#how-to-use)
 * [Project Structure](#project-structure)
+* [APK path](#apk-path)
 
 ## General info
 This is an application named my gallery.The idea of this application is to help people in logging in for whether uploading or viewing their images.
 
 ### Demo
  * Video
+
+
+https://user-images.githubusercontent.com/72389122/199860080-a42ffcfb-3c18-417d-88c5-43135ca7e1de.mp4
+
 
 * Images
 <table>
@@ -101,3 +106,5 @@ my_gallery/
         ├── sharedprefrences
         └── widgets
 ```
+### APK path
+build\app\outputs\bundle\release\app-release.aab
